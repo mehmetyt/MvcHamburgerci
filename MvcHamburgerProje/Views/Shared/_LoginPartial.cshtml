@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MvcHamburgerProje.Data
+@inject SignInManager<Kullanici> SignInManager
+@inject UserManager<Kullanici> UserManager
+
+<ul class="navbar-nav">
+	@if (SignInManager.IsSignedIn(User))
+	{
+		@if (User.IsInRole("Administrator"))
+		{
+
+			<li class="nav-item mx-1">
+				<a class="nav-link text-ligth fs-4" asp-area="Admin" asp-controller="Dashboard" asp-action="Index" title="Manage">&#10038;Yönetim</a>
+			</li>
+		}
+		else
+		{
+			<li class="nav-item mx-1">
+			
+				<a class="btn btn-outline-warning" asp-area="" asp-controller="Siparis" asp-action="Listele">
+				<i class="bi-cart-fill me-1 fs-4"></i>
+					Siparişlerim
+				</a>
+			</li>
+
+			
+		}
+		<li class="nav-item mx-1">
+			<a class="nav-link text-ligth fs-4" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Merhaba, @Context.Request.Cookies["LoginName"]</a>
+		</li>
+		<li class="nav-item">
+			<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+				<button type="submit" class="nav-link btn btn-link text-ligth fs-4">Çıkış Yap</button>
+			</form>
+		</li>
+	}
+	else
+	{
+		<li class="nav-item mx-1">
+			<a class="nav-link text-ligth fs-4" asp-area="Identity" asp-page="/Account/Register">Kayıt Ol</a>
+		</li>
+		<li class="nav-item mx-1">
+			<a class="nav-link text-ligth fs-4" asp-area="Identity" asp-page="/Account/Login">Giriş Yap</a>
+		</li>
+	}
+</ul>

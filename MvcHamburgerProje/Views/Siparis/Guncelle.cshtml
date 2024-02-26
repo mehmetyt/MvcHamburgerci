@@ -1,0 +1,133 @@
+﻿@model SiparisGuncelleVM
+
+<partial name="_PartialYemek" />
+<div class="container" style="height:100vh">
+	<form method="post">
+		<input asp-for="@Model.MevcutMenu.Id" hidden value="@ViewBag.Menu.Id" />
+		<input id="tutar" asp-for="Tutar" hidden value="@ViewBag.Menu.OrtaFiyat" />
+		<div class="row justify-content-start shadow m-3">
+
+			@* Resim *@
+			<div class="col ">
+
+				<div>
+					<div>
+						<strong>@ViewBag.Menu.Ad</strong>
+					</div>
+
+					<img src="~/img/@ViewBag.Menu.Resim" height="300px" />
+
+					<div>
+						@ViewBag.Menu.Aciklama
+					</div>
+
+					<div id="fiyat">@ViewBag.Menu.OrtaFiyat.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("tr-TR"))</div>
+				</div>
+
+				@* Fiyat *@
+				<div id="fiyat"></div>
+				@* Boyut *@
+				<div>
+					<div class="form-check">
+						<div>
+							<input class="form-check-input" @(Model.Boyut=="Kucuk"?"checked":"") asp-for="Boyut" type="radio" value="Kücük" />
+							<label class="form-check-label" asp-for="Boyut">Kucuk</label>
+						</div>
+
+						<div>
+							<input class="form-check-input" @(Model.Boyut == "Orta" ? "checked" : "") asp-for="Boyut" type="radio" value="Orta" />
+							<label class="form-check-label" asp-for="Boyut">Orta</label>
+						</div>
+
+						<div>
+							<input class="form-check-input" @(Model.Boyut == "Buyuk" ? "checked" : "") asp-for="Boyut" type="radio" value="Buyuk" />
+							<label class="form-check-label" asp-for="Boyut">Buyuk</label>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			@* Yan Urunler *@
+			<div class="col">
+				@* <input asp-for="MenuId" hidden value="@ViewBag.Menu.Id" /> *@
+
+				@* Yan Urunler *@
+				<div class="form-group">
+					<label>Yan Ürünler</label>
+					@foreach (YanUrun yanUrun in ViewBag.YanUrunler)
+					{
+						<div class="form-check">
+							<input name="yanUrun" class="form-check-input" type="checkbox" value="@yanUrun.Id" data-fiyat="@yanUrun.Fiyat" id="@($"yanUrun_{yanUrun.Id}")">
+							<label class="form-check-label" for="@($"yanUrun_{yanUrun.Id}")">@yanUrun.Ad (+@yanUrun.Fiyat)</label>
+						</div>
+					}
+				</div>
+
+				<div class="form-group p-3 shadow my-3 rounded">
+					<label asp-for="Adet" class="form-label"></label>
+					<input id="adet" class="form-control" value="1" min="1" asp-for=Adet />
+					<span asp-validation-for="Adet"></span>
+				</div>
+				<div class="form-group p-3 shadow my-3 rounded">
+					<label asp-for="Not" class="form-label"></label>
+					<textarea id="adet" class="form-control" asp-for="Not" cols="5" rows="3" placeholder="Notunuzu giriniz..."></textarea>
+					<span asp-validation-for="Adet"></span>
+				</div>
+
+			</div>
+			<div class="text-end mb-3">
+				<button type="submit" class=" p-2 button-54">Siparisi Tamamla</button>
+				<a class="button-54 p-2 mx-3" asp-area="" asp-controller="Home" asp-action="Index">İptal</a>
+			</div>
+		</div>
+	</form>
+
+</div>
+
+
+@section Scripts {
+	<script>
+		document.querySelectorAll('input[name="Boyut"]').forEach(function (radio) {
+			radio.addEventListener('change', function () {
+				updateSonuc();
+			});
+		});
+
+		document.querySelectorAll('input[type="checkbox"]').forEach(function (checkbox) {
+			checkbox.addEventListener('change', function () {
+				updateSonuc();
+			});
+		});
+		document.querySelector('#adet').addEventListener('change', function () {
+			updateSonuc();
+		});
+		function updateSonuc() {
+			let fiyat;
+
+			var radioButonValue = document.querySelector('input[name="Boyut"]:checked').value;
+
+			if (radioButonValue === "Buyuk") {
+				fiyat = @ViewBag.Menu.BuyukFiyat;
+			}
+			else if (radioButonValue === "Orta") {
+				fiyat = @ViewBag.Menu.OrtaFiyat;
+			}
+			else {
+				fiyat = @ViewBag.Menu.KucukFiyat;
+			}
+
+			document.querySelectorAll('input[type="checkbox"]:checked').forEach(function (checkedCheckbox) {
+				fiyat += parseFloat(checkedCheckbox.getAttribute('data-fiyat'));
+			});
+			fiyat *= document.querySelector('#adet').valueAsNumber;
+
+			$('#fiyat').text(fiyat.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' }));
+			$('#tutar').value(fiyat);
+
+
+		}
+	</script>
+
+}
+
+

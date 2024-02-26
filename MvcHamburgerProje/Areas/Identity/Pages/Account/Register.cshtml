@@ -1,0 +1,57 @@
+﻿@page
+@model RegisterModel
+@{
+	ViewData["Title"] = "Kayıt Ol";
+}
+
+<div class="d-flex justify-content-center mt-2">
+	<div class="w-50">
+
+		<h1 class="text-center">@ViewData["Title"]</h1>
+		<div class="row">
+			<div class="col">
+				<form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+					<h2 class="text-center">Yeni bir hesap oluştur.</h2>
+					<hr />
+					<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+					<div class="form-floating mb-3">
+						<input asp-for="Input.Ad" class="form-control" autocomplete="username" aria-required="true" placeholder="Adınızı giriniz" />
+						<label asp-for="Input.Ad">Ad</label>
+						<span asp-validation-for="Input.Ad" class="text-danger"></span>
+					</div>
+					<div class="form-floating mb-3">
+						<input asp-for="Input.Soyad" class="form-control" autocomplete="username" aria-required="true" placeholder="Soyadınızı giriniz" />
+						<label asp-for="Input.Soyad">Soyad</label>
+						<span asp-validation-for="Input.Soyad" class="text-danger"></span>
+					</div>
+					<div class="form-floating mb-3">
+						<input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="kullaniciadi@example.com" />
+						<label asp-for="Input.Email">E-Posta</label>
+						<span asp-validation-for="Input.Email" class="text-danger"></span>
+					</div>
+					<div class="form-floating mb-3">
+						<input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+						<label asp-for="Input.Password">Şifre</label>
+						<span asp-validation-for="Input.Password" class="text-danger"></span>
+					</div>
+					<div class="form-floating mb-3">
+						<input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+						<label asp-for="Input.ConfirmPassword">Şifre tekrarı</label>
+						<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+					</div>
+					<div class="form-floating mb-3">
+						<textarea asp-for="Input.Adres" rows="5" class="form-control"></textarea>
+						<label asp-for="Input.Adres">Adres</label>
+						<span asp-validation-for="Input.Adres" class="text-danger"></span>
+					</div>
+					<button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-warning">Kayıt Ol</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

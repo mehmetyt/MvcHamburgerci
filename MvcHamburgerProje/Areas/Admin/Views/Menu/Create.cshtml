@@ -1,0 +1,55 @@
+﻿@using MvcHamburgerProje.Areas.Admin.Models
+@model MenuVM
+
+@{
+	ViewData["Title"] = "Create";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h4>Yeni Menü</h4>
+<hr />
+<div class="row">
+	<div class="col-md-6">
+		<form asp-action="Create" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Ad" class="control-label"></label>
+				<input asp-for="Ad" class="form-control" />
+				<span asp-validation-for="Ad" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="KucukFiyat" class="control-label"></label>
+				<input asp-for="KucukFiyat" class="form-control" />
+				<span asp-validation-for="KucukFiyat" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="OrtaFiyat" class="control-label"></label>
+				<input asp-for="OrtaFiyat" class="form-control" />
+				<span asp-validation-for="OrtaFiyat" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="BuyukFiyat" class="control-label"></label>
+				<input asp-for="BuyukFiyat" class="form-control" />
+				<span asp-validation-for="BuyukFiyat" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Resim" class="control-label"></label>
+				<input type="file" asp-for="Resim" class="form-control" />
+				<span asp-validation-for="Resim" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Aciklama" class="control-label"></label>
+				<input asp-for="Aciklama" class="form-control" />
+				<span asp-validation-for="Aciklama" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Ekle" class="btn btn-warning" />
+				<a class="btn btn-dark" asp-action="Index">Listeye Dön</a>
+			</div>
+		</form>
+	</div>
+</div>
+
+

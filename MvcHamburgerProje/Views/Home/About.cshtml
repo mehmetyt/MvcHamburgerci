@@ -1,0 +1,27 @@
+﻿@model List<Adres>
+@{
+	ViewData["Title"] = "Hakkımızda";
+}
+<partial name="_PartialYemek" />
+
+<div class="container">
+
+	<h1 class="text-center">@ViewData["Title"]</h1>
+
+	<img src="~/img/hakkimizdaresim.jpg" class="hakkimizdaresim" />
+
+	<h2>Hoş Geldiniz Hızlı Burger!</h2>
+	<p>Kaliteli lezzetler ve misafir memnuniyeti odaklı hizmet anlayışıyla, Hızlı Burger olarak sizlere unutulmaz bir burger deneyimi sunuyoruz. 20 yılı aşkın süredir sektörde hizmet veren restoranımız, damak zevkinize hitap eden enfes lezzetleriyle bilinir.</p>
+	<h2>Misyonumuz: Lezzet ve Kalite</h2>
+	<p>Hızlı Burger olarak amacımız, müşterilerimize en taze ve kaliteli malzemelerle hazırlanan lezzetli hamburgerleri sunmaktır. Günlük olarak temin ettiğimiz taze malzemelerimiz ve uzman şeflerimizin özenle hazırladığı özel soslarımızla, sizlere lezzetin doruklarına çıkmanızı sağlamak için buradayız.</p>
+	<h2>Yerel Malzeme ve Sürdürülebilirlik</h2>
+	<p>Çevreye duyarlı bir işletme olarak, yerel tedarikçilerden taze malzemeler kullanarak yerel ekonomiye destek sağlıyoruz. Sürdürülebilirlik ilkesiyle hareket ediyor, atıkları minimumda tutmaya özen gösteriyoruz. Lezzetli burgerlerimizi sunarken doğaya olan sorumluluğumuzu da asla unutmuyoruz.</p>
+	<dl>
+		@foreach (var item in Model)
+		{
+			<dt>@item.Ad</dt>
+			<dd>@item.Acıklama</dd>
+		}
+	</dl>
+</div>
+

@@ -1,0 +1,39 @@
+﻿@model MvcHamburgerProje.Data.Adres
+
+@{
+	ViewData["Title"] = "Create";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<h4>İletişim Bilgisi Ekle</h4>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Ad" class="control-label"></label>
+				<input asp-for="Ad" class="form-control" />
+				<span asp-validation-for="Ad" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Acıklama" class="control-label"></label>
+				<input asp-for="Acıklama" class="form-control" />
+				<span asp-validation-for="Acıklama" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Sira" class="control-label"></label>
+				<input asp-for="Sira" class="form-control" />
+				<span asp-validation-for="Sira" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Ekle" class="btn btn-warning" />
+				<a class="btn btn-dark" asp-action="Index">Listeye Dön</a>
+			</div>
+		</form>
+	</div>
+</div>
+
+

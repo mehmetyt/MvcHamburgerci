@@ -1,0 +1,15 @@
+﻿@inject SignInManager<Kullanici> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+
+<ul class="nav nav-pills justify-content-evenly my-5">
+    <li class="nav-item"><a class="btn btn-outline-warning @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profil</a></li>
+    <li class="nav-item"><a class="btn btn-outline-warning @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">E-Posta</a></li>
+    <li class="nav-item"><a class="btn btn-outline-warning @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Şifre</a></li>
+    @if (hasExternalLogins)
+    {
+        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+    }
+</ul>

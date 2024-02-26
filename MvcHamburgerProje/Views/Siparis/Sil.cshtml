@@ -1,0 +1,58 @@
+﻿@model Siparis
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+
+
+<div class="container">
+	<form asp-action="Sil">
+	<h4>Sipariş Numaranız: @Model.SiparisNumarasi</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			Resim
+		</dt>
+		<dd class="col-sm-10">
+			<img src="~/img/@Model.Menu.Resim" height="150px" />
+		</dd>
+		<dt class="col-sm-2">
+			Menu İsmi
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Menu.Ad)
+		</dd>
+		<dt class="col-sm-2">
+			Fiyat
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Tutar)
+		</dd>
+
+		<dt class="col-sm-2">
+			Yan Ürünler
+		</dt>
+		<dd class="col-sm-10">
+
+			@foreach (var item in Model.YanUrunler)
+			{
+
+				@item.Ad
+				<br />
+			}
+		</dd>
+		<dt class="col-sm-2">
+			Notunuz
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Not)
+		</dd>
+	</dl>
+	<div>
+		<input  hidden asp-for="Id"/>
+		<button class="btn btn-danger">Siparişi İptal Et</button> 
+		<a asp-action="Listele" class="btn btn-warning" >Geri</a>
+	</div>
+	</form>
+</div>

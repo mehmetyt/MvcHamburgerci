@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MvcHamburgerProje.Data.Adres>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3>İletişim Bilgileri</h3>
+<p class="text-end">
+    <a class="button-29 text-decoration-none" asp-action="Create"><i class="fas fa-plus"></i></></a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Acıklama)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sira)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Acıklama)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sira)
+            </td>
+            <td>
+                <a class="button-29 text-decoration-none text-warning " asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-pen"></i></a>
+                <a class="button-29 text-decoration-none text-dark mx-2" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-circle-info"></i></a>
+                <a class="button-29 text-decoration-none text-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

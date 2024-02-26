@@ -1,0 +1,33 @@
+﻿@model MvcHamburgerProje.Data.YanUrun
+
+@{
+	ViewData["Title"] = "Create";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h4>Yan Ürün Ekle</h4>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Ad" class="control-label"></label>
+				<input asp-for="Ad" class="form-control" />
+				<span asp-validation-for="Ad" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Fiyat" class="control-label"></label>
+				<input asp-for="Fiyat" class="form-control" />
+				<span asp-validation-for="Fiyat" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Ekle" class="btn btn-warning" />
+				<a class="btn btn-dark" asp-action="Index">Listeye Dön</a>
+			</div>
+		</form>
+	</div>
+</div>
+
+

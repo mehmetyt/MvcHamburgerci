@@ -1,0 +1,64 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+@model IQueryable<Menu>
+
+<partial name="_PartialYemek" />
+@if (Context.Request.Query["Islem"] == "basarili")
+{
+	<div class="alert alert-success">
+		Siparişiniz başarılı bir şekilde oluşturulmuştur.
+	</div>
+}
+
+<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+	@foreach (var item in Model.Skip(((int)ViewBag.Sayfa - 1) * 10).Take(10))
+	{
+		<div class="col mb-5">
+			<div class="card h-100">
+				<!-- Product image-->
+				<img class="card-img-top img-index" src="~/img/@item.Resim" alt="@item.Ad" />
+				<!-- Product details-->
+				<div class="card-body p-4">
+					<div class="text-center">
+						<!-- Product name-->
+						<h5 class="fw-bolder">@item.Ad</h5>
+						<!-- Product price-->
+						@item.OrtaFiyat.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("tr-TR"))
+					</div>
+				</div>
+				<!-- Product actions-->
+				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+					<div class="text-center"><a class="button-74" asp-area="" asp-controller="Siparis" asp-action="Index" asp-route-id="@item.Id">Sipariş Ver</a></div>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+
+<div class="d-flex justify-content-center page-numbers">
+	<nav>
+		<ul class="pagination">
+			<li class="page-item">
+				<a class="page-link @(ViewBag.Sayfa==1?"disabled":"")" asp-route-sayfa="@(ViewBag.Sayfa-1)">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+			@for (int i = 0; i < Math.Ceiling(Model.Count() / 10.0); i++)
+			{
+				<li class="page-item"><a class="page-link @(i == ViewBag.Sayfa-1 ? "active" : "")" asp-route-sayfa="@(i + 1)">@(i + 1)</a></li>
+			}
+
+			<li class="page-item">
+				<a class="page-link @(ViewBag.Sayfa==Math.Ceiling(Model.Count() / 10.0)?"disabled":"")" asp-route-sayfa="@(ViewBag.Sayfa+1)">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</div>
+
+
+
+

@@ -1,0 +1,53 @@
+﻿@model IQueryable<Siparis>
+@{
+	ViewData["Title"] = "Siparişler";
+}
+@if (Context.Request.Query["Islem"] == "silindi")
+{
+	<div class="alert alert-danger">
+		Siparişiniz silindi
+	</div>
+}
+<div class="container mt-2">
+	<h1>@ViewData["Title"]</h1>
+	<div>
+
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Sipariş Numarası</th>
+					<th>Menu</th>
+					<th>Tutar</th>
+					<th>Adet</th>
+					<th>Tarih</th>
+					<th>İşlemler</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var siparis in Model)
+				{
+					<tr>
+						<td>@siparis.SiparisNumarasi</td>
+						<td>@siparis.Menu.Ad</td>
+						<td>@siparis.Tutar</td>
+						<td>@siparis.Adet</td>
+						<td>@siparis.Tarih</td>
+						<td>
+							<a asp-action="Ayrinti" asp-route-id="@siparis.Id" class="btn btn-warning">Detaylar</a>
+							@if (DateTime.Now - siparis.Tarih < TimeSpan.FromMinutes(5))
+							{
+								<a asp-action="Sil" asp-route-id="@siparis.Id" class="btn btn-dark">Iptal</a>
+							}
+							else
+							{
+								<button disabled asp-action="Sil" asp-route-id="@siparis.Id" class="btn btn-dark">Iptal</button>
+							}
+						</td>
+
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>

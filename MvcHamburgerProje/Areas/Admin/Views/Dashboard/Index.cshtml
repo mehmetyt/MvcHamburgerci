@@ -1,0 +1,51 @@
+﻿@{
+	ViewBag.Title = "Siparişler";
+}
+
+@model List<Kullanici>
+
+<form class="mb-2">
+	<div class="row">
+		<select class="form-select col mx-2" name="id">
+			<option  value="herkes">Herkes</option>
+			@foreach (var item in Model)
+			{
+				if (item.Id == ViewBag.Id)
+				{
+					<option value="@item.Id" selected>@item.Onizleme</option>
+				}
+				else
+				{
+					<option value="@item.Id">@item.Onizleme</option>
+				}
+			}
+		</select>
+		<input class="form-control col" name="date" type="date" value="@ViewBag.Tarih.ToString("yyyy-MM-dd")" />
+		<button class="btn btn-warning col-sm-2 ms-2">Göster</button>
+	</div>
+</form>
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Sipariş Numarası</th>
+			<th>Menu</th>
+			<th>Tutar</th>
+			<th>Adet</th>
+			<th>Tarih</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var siparis in ViewBag.Siparisler)
+		{
+			<tr>
+				<td>@siparis.SiparisNumarasi</td>
+				<td>@siparis.Menu.Ad</td>
+				<td>@siparis.Tutar</td>
+				<td>@siparis.Adet</td>
+				<td>@siparis.Tarih</td>
+			</tr>
+		}
+	</tbody>
+</table>
